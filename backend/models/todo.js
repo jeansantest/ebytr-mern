@@ -41,4 +41,20 @@ const updateTodo = async (id, todo) => {
   return result;
 };
 
-module.exports = { createTodo, getAllTodo, getTodosByName, updateTodo };
+const getTodoById = async (id) => {
+  const result = await connection()
+    .then((db) => db.collection(TODO).findOne(ObjectId(id)))
+    .catch(() => null);
+
+  return result;
+};
+
+const deleteTodo = async (id) => {
+  const result = await connection()
+    .then((db) => db.collection(TODO).deleteOne({ _id: ObjectId(id) }))
+    .catch(() => null);
+
+  return result;
+};
+
+module.exports = { createTodo, getAllTodo, getTodosByName, updateTodo, deleteTodo, getTodoById };

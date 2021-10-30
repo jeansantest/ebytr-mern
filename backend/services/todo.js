@@ -20,4 +20,14 @@ const updateTodo = async (id, todo) => {
   return result;
 };
 
-module.exports = { createTodo, getAllTodo, getTodosByName, updateTodo };
+const deleteTodo = async (id) => {
+  const result = await todoModels.deleteTodo(id);
+  return result;
+};
+
+const getTodoById = async (id) => {
+  const result = await todoModels.getTodoById(id);
+  return result;
+};
+
+module.exports = { createTodo, getAllTodo, getTodosByName, updateTodo, deleteTodo, getTodoById };
