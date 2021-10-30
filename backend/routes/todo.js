@@ -11,7 +11,7 @@ router.get('/:name', todoValidate.verifyTodoNameParam, todoControllers.getTodosB
 router.post('/', todoValidate.verifyTodoCreate, todoControllers.createTodo);
 
 router.put('/:id', 
-  todoValidate.verifyTodoNameBody, todoValidate.verifyTodoId, todoControllers.updateTodo);
+  todoValidate.verifyTodoNameData, todoValidate.verifyTodoId, todoControllers.updateTodo);
 
 router.delete('/:id', todoValidate.verifyTodoId, todoControllers.deleteTodo);
 

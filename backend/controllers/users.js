@@ -9,17 +9,16 @@ const { TODO_SECRET } = process.env;
 
 const createUser = async (req, res) => {
   const { name, email, password } = req.body;
-  let token;
 
   if (req.url.split('/')[2] === 'admin') {
     const admin = await usersServices.createUser(name, email, password, 'admin');
-    token = jwt.sign({ data: req.body }, TODO_SECRET, jwtConfig);
-    return res.status(201).json({ ...admin, token });
+
+    return res.status(201).json({ ...admin });
   }
   
   const result = await usersServices.createUser(name, email, password);
-  token = jwt.sign({ data: req.body }, TODO_SECRET, jwtConfig);
-  res.status(201).json({ ...result, token });
+
+  res.status(201).json({ ...result });
 };
 
 const loginUser = async (req, res) => {
@@ -35,7 +34,7 @@ const loginUser = async (req, res) => {
     data: { id: result[id], name: result.name, email: result.email, role: result.role }, 
   }, TODO_SECRET, jwtConfig);
 
-  res.status(200).json({ ...result, token });
+  res.status(200).json({ token });
 };
 
 module.exports = { createUser, loginUser };

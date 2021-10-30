@@ -35,14 +35,14 @@ const verifyToCreateAdmin = (req, res, next) => {
     return decoded;
   });
 
-  if (verify.err) return res.status(verify.status).json(verify.message);
+  if (verify.err) return res.status(verify.status).json({ message: verify.message });
 
   next();
 };
 
 const verifyCreateUser = async (req, res, next) => {
   const { error } = schemaCreate.validate(req.body);
-  const { email } = req.body;
+  const { name, email } = req.body;
 
   if (error) {
     return res.status(400).json(errorMessage('Invalid entries. Try again.'));
@@ -54,9 +54,14 @@ const verifyCreateUser = async (req, res, next) => {
 
   const users = await usersService.getAllUsers();
   const filterByEmail = users.filter((user) => user.email === email);
+  const filterByName = users.filter((user) => user.name === name);
 
   if (filterByEmail.length > 0) {
     return res.status(409).json(errorMessage('Email already registered'));
+  }
+
+  if (filterByName.length > 0) {
+    return res.status(409).json(errorMessage('Name already registered'));
   }
 
   next();
