@@ -5,4 +5,14 @@ const createTodo = (name, todo) => {
   return result;
 };
 
-module.exports = { createTodo };
+const getAllTodo = () => {
+  const result = todoModels.getAllTodo();
+  return result;
+};
+
+const getTodosByName = (name) => {
+  const result = todoModels.getTodosByName(name);
+  return result;
+};
+
+module.exports = { createTodo, getAllTodo, getTodosByName };

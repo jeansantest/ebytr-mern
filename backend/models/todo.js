@@ -15,4 +15,20 @@ const createTodo = async (name, todo) => {
   return result;
 };
 
-module.exports = { createTodo };
+const getAllTodo = async () => {
+  const result = await connection()
+    .then((db) => db.collection(TODO).find().toArray())
+    .catch(() => null);
+
+  return result;
+};
+
+const getTodosByName = async (name) => {
+  const result = await connection()
+    .then((db) => db.collection(TODO).find({ name }).toArray())
+    .catch(() => null);
+
+  return result;
+};
+
+module.exports = { createTodo, getAllTodo, getTodosByName };
