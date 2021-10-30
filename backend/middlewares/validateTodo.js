@@ -52,20 +52,21 @@ const verifyTodoId = async (req, res, next) => {
   const token = req.headers.authorization;
   const verify = verifyToken(req, token);
   const { id } = req.params;
-  const getById = await todoServices.getTodoById(id);
-  const userUpdatesOnlyTheirOwnTodo = verifyToAdminUpdate(req.data, getById);
 
   if (verify.message) {
     return res.status(verify.status).json({ message: verify.message });
   }
-
+  
+  if (!ObjectId.isValid(id)) return res.status(400).json(errorMessage('Invalid id'));
+  
+  const getById = await todoServices.getTodoById(id);
+  const userUpdatesOnlyTheirOwnTodo = verifyToAdminUpdate(req.data, getById);
+  
   if (userUpdatesOnlyTheirOwnTodo) { 
     return res.status(userUpdatesOnlyTheirOwnTodo.status).json({ 
       message: userUpdatesOnlyTheirOwnTodo.message, 
     });
   }
-
-  if (!ObjectId.isValid(id)) return res.status(400).json(errorMessage('Invalid id'));
 
   if (!getById) return res.status(404).json(errorMessage('Todo not found'));
 
@@ -95,4 +96,16 @@ const verifyTodoNameData = async (req, res, next) => {
   next();
 };
 
-module.exports = { verifyTodoCreate, verifyTodoId, verifyTodoNameParam, verifyTodoNameData };
+const verifyTodoStatus = async (req, res, next) => {
+  const { status } = req.params;
+  const statusThatCanBeUsed = ['pendente', 'andamento', 'pronto'];
+
+  if (!statusThatCanBeUsed.some((e) => e === status)) {
+    return res.status(405).json({ message: 'this status cant be used' });
+  }
+
+  next();
+};
+
+module.exports = { 
+  verifyTodoCreate, verifyTodoId, verifyTodoNameParam, verifyTodoNameData, verifyTodoStatus };
