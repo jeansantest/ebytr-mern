@@ -1,15 +1,13 @@
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
+const todoRouter = require('../routes/todo');
 
 const app = express();
+require('dotenv').config({ path: './config.env' });
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-  res.send('Testando');
-});
+app.use(express.json());
+app.use('/todo', todoRouter);
 
 module.exports = app;
