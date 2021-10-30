@@ -19,4 +19,12 @@ const getAllUsers = async () => {
   return result;
 };
 
-module.exports = { createUser, getAllUsers };
+const loginUser = async (email, password) => {
+  const result = await connection()
+    .then((db) => db.collection(USERS).findOne({ email, password }))
+    .catch(() => null);
+
+  return result;
+};
+
+module.exports = { createUser, getAllUsers, loginUser };

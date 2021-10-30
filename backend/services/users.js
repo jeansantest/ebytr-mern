@@ -10,4 +10,9 @@ const getAllUsers = () => {
   return result;
 };
 
-module.exports = { createUser, getAllUsers };
+const loginUser = (email, password) => {
+  const result = usersModels.loginUser(email, password);
+  return result;
+};
+
+module.exports = { createUser, getAllUsers, loginUser };

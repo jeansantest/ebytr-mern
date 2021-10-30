@@ -6,4 +6,9 @@ const router = express.Router();
 
 router.post('/signup', usersValidate.verifyCreateUser, usersControllers.createUser);
 
+router.post('/signup/admin', 
+  usersValidate.verifyToCreateAdmin, usersValidate.verifyCreateUser, usersControllers.createUser);
+
+router.post('/login', usersValidate.verifyLogin, usersControllers.loginUser);
+
 module.exports = router;

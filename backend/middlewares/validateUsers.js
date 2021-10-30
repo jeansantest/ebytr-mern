@@ -20,26 +20,30 @@ const schemaCreate = Joi.object({
   role: Joi.string(),
 });
 
-const verifyToCreateAdmin = (req, res) => {
+const verifyToCreateAdmin = (req, res, next) => {
   const token = req.headers.authorization;
   const secret = process.env.TODO_SECRET;
 
-  jwt.verify(token, secret, (err, decoded) => {
+  const verify = jwt.verify(token, secret, (err, decoded) => {
     if (err) {
-      return res.status(401).json({ message: 'missing auth token' });
+      return { status: 401, message: 'missing auth token' };
     }
     if (decoded.data.role !== 'admin') {
-      return res.status(403).json({ message: 'Only admins can register new admins' });
+      return { status: 403, message: 'Only admins can register new admins' };
     }
-
+    
     return decoded;
   });
+
+  if (verify.err) return res.status(verify.status).json(verify.message);
+
+  next();
 };
 
 const verifyCreateUser = async (req, res, next) => {
   const { error } = schemaCreate.validate(req.body);
-  const { email, role } = req.body;
-  
+  const { email } = req.body;
+
   if (error) {
     return res.status(400).json(errorMessage('Invalid entries. Try again.'));
   }
@@ -55,11 +59,17 @@ const verifyCreateUser = async (req, res, next) => {
     return res.status(409).json(errorMessage('Email already registered'));
   }
 
-  if (role === 'admin') { 
-    verifyToCreateAdmin(req, res); 
+  next();
+};
+
+const verifyLogin = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(401).json(errorMessage('All fields must be filled'));
   }
 
   next();
 };
 
-module.exports = { verifyCreateUser };
+module.exports = { verifyCreateUser, verifyLogin, verifyToCreateAdmin };
