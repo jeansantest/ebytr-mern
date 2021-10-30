@@ -17,4 +17,12 @@ const getTodosByName = async (req, res) => {
   res.status(200).json({ todos: result });
 };
 
-module.exports = { createTodo, getTodosByName, getAllTodo };
+const updateTodo = async (req, res) => {
+  const { id } = req.params;
+  const { todo } = req.body;
+  const result = await todoServices.updateTodo(id, todo);
+  result.todo = todo;
+  res.status(200).json(result);
+};
+
+module.exports = { createTodo, getTodosByName, getAllTodo, updateTodo };

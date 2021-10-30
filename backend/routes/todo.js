@@ -9,4 +9,6 @@ router.get('/:name', todoControllers.getTodosByName);
 
 router.post('/', todoControllers.createTodo);
 
+router.put('/:id', todoControllers.updateTodo);
+
 module.exports = router;

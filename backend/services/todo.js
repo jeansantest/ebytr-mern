@@ -15,4 +15,9 @@ const getTodosByName = (name) => {
   return result;
 };
 
-module.exports = { createTodo, getAllTodo, getTodosByName };
+const updateTodo = async (id, todo) => {
+  const result = await todoModels.updateTodo(id, todo);
+  return result;
+};
+
+module.exports = { createTodo, getAllTodo, getTodosByName, updateTodo };
