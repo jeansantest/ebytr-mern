@@ -12,11 +12,16 @@ const schemaCreate = Joi.object({
 });
 
 const verifyTodoCreate = async (req, res, next) => {
+  const { name, todo } = req.body;
   const { error } = schemaCreate.validate(req.body);
+  const getByName = await todoServices.getTodosByName(name);
+  const filteredByTodo = getByName.filter((e) => e.todo === todo);
 
   if (error) {
     return res.status(400).json(errorMessage('Invalid entries. Try again.'));
   }
+
+  if (filteredByTodo.length > 0) return res.status(400).json(errorMessage('Todo already exists'));
 
   next();
 };
