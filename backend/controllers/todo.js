@@ -1,7 +1,10 @@
+// const jwt = require('jsonwebtoken');
 const todoServices = require('../services/todo');
 
 const createTodo = async (req, res) => {
-  const { name, todo } = req.body;
+  const { name } = req.data;
+  const { todo } = req.body;
+  
   const result = await todoServices.createTodo(name, todo);
   res.status(201).json(result);
 };

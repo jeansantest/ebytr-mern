@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 const { ObjectId } = require('mongodb');
 const todoServices = require('../services/todo');
 
@@ -11,19 +12,58 @@ const schemaCreate = Joi.object({
   todo: Joi.string().min(4).required(),
 });
 
-const verifyTodoCreate = async (req, res, next) => {
-  const { error } = schemaCreate.validate(req.body);
+const secret = process.env.TODO_SECRET;
+const verifyToken = (req, token) => jwt.verify(token, secret, (err, decoded) => {
+  if (err) return { status: 401, message: 'missing auth token' };
+  req.data = decoded.data;
+  return decoded.data;
+});
 
-  if (error) {
-    return res.status(400).json(errorMessage('Invalid entries. Try again.'));
+const verifyTodoCreate = async (req, res, next) => {
+  const token = req.headers.authorization;
+  
+  const { todo } = req.body;
+  const verify = verifyToken(req, token);
+
+  if (verify.message) {
+    return res.status(verify.status).json({ message: verify.message });
   }
+
+  const { error } = schemaCreate.validate({ name: req.data.name, todo });
+  const getByName = await todoServices.getTodosByName(req.data.name);
+  const filteredByTodo = getByName.filter((e) => e.todo === todo);
+
+  if (error) return res.status(400).json(errorMessage('Invalid entries. Try again.'));
+
+  if (filteredByTodo.length > 0) return res.status(400).json(errorMessage('Todo already exists'));
 
   next();
 };
 
+const verifyToAdminUpdate = (data, getById) => {
+  const { role, name } = data;
+  if (role !== 'admin' && name !== getById.name) {
+    return { status: 401, message: 'this todo is not yours' };
+  }
+  return false;
+};
+
 const verifyTodoId = async (req, res, next) => {
+  const token = req.headers.authorization;
+  const verify = verifyToken(req, token);
   const { id } = req.params;
   const getById = await todoServices.getTodoById(id);
+  const userUpdatesOnlyTheirOwnTodo = verifyToAdminUpdate(req.data, getById);
+
+  if (verify.message) {
+    return res.status(verify.status).json({ message: verify.message });
+  }
+
+  if (userUpdatesOnlyTheirOwnTodo) { 
+    return res.status(userUpdatesOnlyTheirOwnTodo.status).json({ 
+      message: userUpdatesOnlyTheirOwnTodo.message, 
+    });
+  }
 
   if (!ObjectId.isValid(id)) return res.status(400).json(errorMessage('Invalid id'));
 
@@ -40,12 +80,19 @@ const verifyTodoNameParam = async (req, res, next) => {
   next();
 };
 
-const verifyTodoNameBody = async (req, res, next) => {
-  const { name } = req.body;
+const verifyTodoNameData = async (req, res, next) => {
+  const token = req.headers.authorization;
+  const verify = verifyToken(req, token);
+
+  if (verify.message) {
+    return res.status(verify.status).json({ message: verify.message });
+  }
+
+  const { name } = req.data;
 
   if (!name || name.length < 3) return res.status(400).json(errorMessage('Invalid name'));
 
   next();
 };
 
-module.exports = { verifyTodoCreate, verifyTodoId, verifyTodoNameParam, verifyTodoNameBody };
+module.exports = { verifyTodoCreate, verifyTodoId, verifyTodoNameParam, verifyTodoNameData };
