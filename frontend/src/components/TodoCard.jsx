@@ -80,7 +80,9 @@ function TodoCard(props) {
 						onChange={handleChange}
 						value={todo}
 					/>
-					<FaEdit onClick={editTodo}>Editar</FaEdit>
+					<FaEdit style={{ cursor: 'pointer' }} onClick={editTodo}>
+						Editar
+					</FaEdit>
 				</div>
 			) : (
 				<p>{props.todo}</p>
@@ -90,9 +92,12 @@ function TodoCard(props) {
 				{status}
 			</p>
 			<div>
-				<FaTrashAlt onClick={deleteTodo} />
+				<FaTrashAlt style={{ cursor: 'pointer' }} onClick={deleteTodo} />
 
-				<FaEdit onClick={handleEdit} />
+				<FaEdit
+					style={{ cursor: 'pointer', marginLeft: '20px' }}
+					onClick={handleEdit}
+				/>
 			</div>
 		</div>
 	);

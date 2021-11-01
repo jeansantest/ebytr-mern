@@ -14,7 +14,7 @@ function Header() {
 
 	return (
 		<header className="header">
-			<Link to="/">Todo List</Link>
+			<Link to="/">Minha Todo List</Link>
 			{!token ? (
 				<div>
 					<Link to="/login">Logar</Link>
