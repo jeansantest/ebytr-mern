@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './styles/InputTodo.css';
 
 function InputTodo({ forceUpdate, update }) {
 	const [todo, setTodo] = React.useState('');
@@ -27,10 +28,17 @@ function InputTodo({ forceUpdate, update }) {
 	};
 
 	return (
-		<div>
+		<div className="div-todo">
 			<form>
-				<input type="text" name="todo" onChange={handleChange} value={todo} />
-				<button type="submit" onClick={handleSubmit}>
+				<input
+					className="input-todo"
+					type="text"
+					name="todo"
+					onChange={handleChange}
+					value={todo}
+					placeholder="Adicionar uma nova task"
+				/>
+				<button className="submit-login" type="submit" onClick={handleSubmit}>
 					Adicionar
 				</button>
 			</form>

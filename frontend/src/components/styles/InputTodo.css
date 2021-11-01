@@ -1,0 +1,12 @@
+.input-todo {
+	font-size: 18px;
+	padding: 8px;
+	width: 300px;
+}
+
+.div-todo {
+	margin-top: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

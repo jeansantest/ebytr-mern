@@ -25,9 +25,19 @@ function Home() {
 			) : todoByName.todos.length > 0 ? (
 				<div>
 					<InputTodo forceUpdate={forceUpdate} update={update} />
-					{todoByName.todos.map((e, i) => (
-						<TodoCard key={i} name={e.name} todo={e.todo} status={e.status} />
-					))}
+					<div className="divtodo-home">
+						{todoByName.todos.map((e, i) => (
+							<TodoCard
+								key={i}
+								id={e._id}
+								name={e.name}
+								todo={e.todo}
+								status={e.status}
+								forceUpdate={forceUpdate}
+								update={update}
+							/>
+						))}
+					</div>
 				</div>
 			) : (
 				<div>

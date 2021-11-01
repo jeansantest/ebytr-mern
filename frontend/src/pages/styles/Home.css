@@ -6,3 +6,11 @@
 	color: var(--color-h1);
 	height: 95vh;
 }
+
+.divtodo-home {
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
