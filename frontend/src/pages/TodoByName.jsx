@@ -46,7 +46,7 @@ function TodoByName() {
 			{!token ? (
 				<div className="divh1-home">
 					<h1 className="h1-home">
-						Você precisa estar logado para poder criar uma task.
+						Você precisa estar logado para poder procurar por um nome.
 					</h1>
 					<Link to="/login">Clique aqui para fazer seu login</Link>
 				</div>
