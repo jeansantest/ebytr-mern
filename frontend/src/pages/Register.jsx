@@ -3,9 +3,9 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import './styles/Login.css';
 
-function Login() {
-	const [data, setData] = React.useState({ email: '', password: '' });
-	const [logged, setLogged] = React.useState(false);
+function Register() {
+	const [data, setData] = React.useState({ name: '', email: '', password: '' });
+	const [registered, setRegistered] = React.useState(false);
 	const token = localStorage.getItem('token');
 
 	const handleChange = ({ target }) => {
@@ -16,22 +16,29 @@ function Login() {
 	const handleSubmit = async (e) => {
 		try {
 			e.preventDefault();
-			const result = await axios.post(
-				'https://ebytr.herokuapp.com/users/login',
-				data
-			);
-			localStorage.setItem('token', result.data.token);
+			await axios.post('https://ebytr.herokuapp.com/users/signup', data);
+			alert('Conta criada com sucesso');
+			setRegistered('registered');
 		} catch (err) {
-			setLogged('invalid');
+			setRegistered('invalid');
 		}
 	};
 
 	return (
 		<div className="div-login">
 			<div className="divh1-login">
-				<h1 className="h1-login">Entre para continuar</h1>
+				<h1 className="h1-login">Registre-se para criar suas tasks</h1>
 			</div>
 			<form className="form-login">
+				<label htmlFor="name">Qual é o seu nome?</label>
+				<input
+					type="text"
+					name="name"
+					onChange={handleChange}
+					value={data.name}
+					placeholder="Ex.: johndoe (deve ser único)"
+					className="input-login"
+				/>
 				<label htmlFor="email">Qual é o seu e-mail?</label>
 				<input
 					type="text"
@@ -50,15 +57,16 @@ function Login() {
 					placeholder="Sua senha"
 					className="input-login"
 				/>
-				{logged === 'invalid' &&
-					'Email ou senha inválidos ou usuário ainda não criado'}
+				{registered === 'invalid' &&
+					'Nome, email ou senha inválidos ou usuário já criado'}
 				<button type="submit" onClick={handleSubmit} className="submit-login">
-					Entrar
+					Registrar
 				</button>
+				{registered === 'registered' && <Redirect to="/login" />}
 				{token && <Redirect to="/" />}
 			</form>
 		</div>
 	);
 }
 
-export default Login;
+export default Register;
