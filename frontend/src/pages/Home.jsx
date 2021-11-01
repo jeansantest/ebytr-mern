@@ -21,7 +21,7 @@ function Home() {
 					<Link to="/login">Clique aqui para fazer seu login</Link>
 				</div>
 			) : !todoByName ? (
-				'Carregando'
+				<p style={{ textAlign: 'center' }}>Carregando...</p>
 			) : todoByName.todos.length > 0 ? (
 				<div>
 					<InputTodo forceUpdate={forceUpdate} update={update} />
@@ -42,7 +42,7 @@ function Home() {
 			) : (
 				<div>
 					<InputTodo forceUpdate={forceUpdate} update={update} />
-					Sem tasks no momento
+					<p style={{ textAlign: 'center' }}>Sem tasks no momento</p>
 				</div>
 			)}
 		</div>

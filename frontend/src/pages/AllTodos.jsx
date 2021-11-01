@@ -19,7 +19,7 @@ function AllTodos() {
 					<Link to="/login">Clique aqui para fazer seu login</Link>
 				</div>
 			) : !todos ? (
-				'Carregando'
+				<p style={{ textAlign: 'center' }}>Carregando</p>
 			) : (
 				<div className="divtodo-home">
 					{todos.todos.map((e, i) => (
