@@ -19,13 +19,17 @@ function TodoCard(props) {
 	};
 
 	const editTodo = async () => {
-		await axios.put(
-			`https://ebytr.herokuapp.com/todo/${props.id}`,
-			{ todo },
-			{ headers: { Authorization: token } }
-		);
-		props.forceUpdate(!props.update);
-		setToEdit(!toEdit);
+		try {
+			await axios.put(
+				`https://ebytr.herokuapp.com/todo/${props.id}`,
+				{ todo },
+				{ headers: { Authorization: token } }
+			);
+			props.forceUpdate(!props.update);
+			setToEdit(!toEdit);
+		} catch (err) {
+			setToEdit(!toEdit);
+		}
 	};
 
 	const deleteTodo = async () => {
@@ -33,22 +37,6 @@ function TodoCard(props) {
 			headers: { Authorization: token },
 		});
 		props.forceUpdate(!props.update);
-	};
-
-	const statusFormated = () => {
-		switch (props.status) {
-			case 'pendente':
-				setStatus('Pendente');
-				break;
-			case 'andamento':
-				setStatus('Em andamento');
-				break;
-			case 'pronto':
-				setStatus('Feita');
-				break;
-			default:
-				console.log('Erro: Nenhum status');
-		}
 	};
 
 	const editStatus = async () => {
@@ -65,6 +53,21 @@ function TodoCard(props) {
 	};
 
 	React.useEffect(() => {
+		const statusFormated = () => {
+			switch (props.status) {
+				case 'pendente':
+					setStatus('Pendente');
+					break;
+				case 'andamento':
+					setStatus('Em andamento');
+					break;
+				case 'pronto':
+					setStatus('Feita');
+					break;
+				default:
+					console.log('Erro: Nenhum status');
+			}
+		};
 		statusFormated();
 	}, [status, props.status]);
 
