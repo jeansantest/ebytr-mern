@@ -14,7 +14,7 @@ function AllTodos() {
 			{!token ? (
 				<div className="divh1-home">
 					<h1 className="h1-home">
-						Você precisa estar logado para poder criar uma task.
+						Você precisa estar logado para poder ver todas as tasks.
 					</h1>
 					<Link to="/login">Clique aqui para fazer seu login</Link>
 				</div>
