@@ -1,0 +1,24 @@
+.header {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 5vh;
+	background-color: #002c21;
+}
+
+a {
+	cursor: pointer;
+	color: var(--color-a);
+	text-decoration: none;
+	margin-left: 20px;
+	transition: all 0.3s;
+}
+
+a:hover {
+	color: #02dda7;
+	font-size: 20px;
+}
+
+.h1-header {
+	color: var(--color-h1);
+}
