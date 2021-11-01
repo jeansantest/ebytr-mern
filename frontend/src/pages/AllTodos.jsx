@@ -1,15 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { useTodo } from '../contexts/TodoContext';
 import TodoCard from '../components/TodoCard';
 
 function AllTodos() {
+	const token = localStorage.getItem('token');
 	const { todos, forceUpdate, update } = useTodo();
 
 	return (
 		<div>
 			<Header />
-			{!todos ? (
+			{!token ? (
+				<div className="divh1-home">
+					<h1 className="h1-home">
+						Você precisa estar logado para poder criar uma task.
+					</h1>
+					<Link to="/login">Clique aqui para fazer seu login</Link>
+				</div>
+			) : !todos ? (
 				'Carregando'
 			) : (
 				<div className="divtodo-home">
