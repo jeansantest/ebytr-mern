@@ -14,7 +14,11 @@ function Header() {
 
 	return (
 		<header className="header">
-			<Link to="/">Todo List</Link>
+			<div>
+				<Link to="/">Minha Todo List</Link>
+				<Link to="/all-tasks">Todas as todo lists</Link>
+				<Link to="/search">Todo list por nome</Link>
+			</div>
 			{!token ? (
 				<div>
 					<Link to="/login">Logar</Link>
