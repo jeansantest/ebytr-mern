@@ -10,6 +10,7 @@ export function TodoProvider({ children }) {
 	const [todoByName, setTodoByName] = React.useState(null);
 	const [update, forceUpdate] = React.useState(false);
 	const [sortStatus, setSortStatus] = React.useState(false);
+	const [sortDate, setSortDate] = React.useState(false);
 
 	const sortByStatus = ({ todos }, byName) => {
 		if (todos) {
@@ -19,8 +20,31 @@ export function TodoProvider({ children }) {
 			const objectFiltered = {
 				todos: [...filterByPending, ...filterByInProgress, ...filterByDone],
 			};
-			if (sortStatus && !byName) setTodos(objectFiltered);
-			if (sortStatus && byName) setTodoByName(objectFiltered);
+			if (sortStatus && !byName) {
+				setSortDate(false);
+				setTodos(objectFiltered);
+			}
+			if (sortStatus && byName) {
+				setSortDate(false);
+				setTodoByName(objectFiltered);
+			}
+		}
+	};
+
+	const sortByDate = ({ todos }, byName) => {
+		if (todos) {
+			const filterByDate = todos.sort(
+				(a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+			);
+			console.log(filterByDate);
+			if (sortDate && !byName) {
+				setSortStatus(false);
+				setTodos({ todos: filterByDate });
+			}
+			if (sortDate && byName) {
+				setSortStatus(false);
+				setTodoByName({ todos: filterByDate });
+			}
 		}
 	};
 
@@ -32,11 +56,13 @@ export function TodoProvider({ children }) {
 			);
 			setTodos(result.data);
 			setTodoByName(resultByName.data);
+			sortByDate(result.data);
+			sortByDate(resultByName.data, true);
 			sortByStatus(result.data);
 			sortByStatus(resultByName.data, true);
 		};
 		fetchAllTodo();
-	}, [decoded, update, sortStatus]);
+	}, [decoded, update, sortStatus, sortDate]);
 
 	return (
 		<TodoContext.Provider
@@ -47,6 +73,8 @@ export function TodoProvider({ children }) {
 				update,
 				setSortStatus,
 				sortStatus,
+				sortDate,
+				setSortDate,
 			}}
 		>
 			{children}
