@@ -38,7 +38,6 @@ export function TodoProvider({ children }) {
 			const filterByDate = todos.sort(
 				(a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
 			);
-			console.log(filterByDate);
 			if (sortDate && !byName) {
 				setSortTodoName(false);
 				setSortStatus(false);
@@ -58,7 +57,6 @@ export function TodoProvider({ children }) {
 				let y = b.todo.toUpperCase();
 				return x === y ? 0 : x > y ? 1 : -1;
 			});
-			console.log(filterByTodoName);
 			if (sortTodoName && !byName) {
 				setSortDate(false);
 				setSortStatus(false);
