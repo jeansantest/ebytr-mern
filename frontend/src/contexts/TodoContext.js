@@ -9,6 +9,20 @@ export function TodoProvider({ children }) {
 	const [todos, setTodos] = React.useState(null);
 	const [todoByName, setTodoByName] = React.useState(null);
 	const [update, forceUpdate] = React.useState(false);
+	const [sortStatus, setSortStatus] = React.useState(false);
+
+	const sortByStatus = ({ todos }, byName) => {
+		if (todos) {
+			const filterByPending = todos.filter((e) => e.status === 'pendente');
+			const filterByInProgress = todos.filter((e) => e.status === 'andamento');
+			const filterByDone = todos.filter((e) => e.status === 'pronto');
+			const objectFiltered = {
+				todos: [...filterByPending, ...filterByInProgress, ...filterByDone],
+			};
+			if (sortStatus && !byName) setTodos(objectFiltered);
+			if (sortStatus && byName) setTodoByName(objectFiltered);
+		}
+	};
 
 	React.useEffect(() => {
 		const fetchAllTodo = async () => {
@@ -18,12 +32,23 @@ export function TodoProvider({ children }) {
 			);
 			setTodos(result.data);
 			setTodoByName(resultByName.data);
+			sortByStatus(result.data);
+			sortByStatus(resultByName.data, true);
 		};
 		fetchAllTodo();
-	}, [decoded, update]);
+	}, [decoded, update, sortStatus]);
 
 	return (
-		<TodoContext.Provider value={{ todos, todoByName, forceUpdate, update }}>
+		<TodoContext.Provider
+			value={{
+				todos,
+				todoByName,
+				forceUpdate,
+				update,
+				setSortStatus,
+				sortStatus,
+			}}
+		>
 			{children}
 		</TodoContext.Provider>
 	);
