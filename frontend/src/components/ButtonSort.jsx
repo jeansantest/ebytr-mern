@@ -12,14 +12,26 @@ function ButtonSort() {
 	} = useTodo();
 
 	return (
-		<div>
-			<button type="button" onClick={() => setSortStatus(!sortStatus)}>
+		<div className="div-todo">
+			<button
+				type="button"
+				className="submit-login"
+				onClick={() => setSortStatus(!sortStatus)}
+			>
 				Ordernar por status
 			</button>
-			<button type="button" onClick={() => setSortDate(!sortDate)}>
+			<button
+				type="button"
+				className="submit-login"
+				onClick={() => setSortDate(!sortDate)}
+			>
 				Ordernar por data
 			</button>
-			<button type="button" onClick={() => setSortTodoName(!sortTodoName)}>
+			<button
+				type="button"
+				className="submit-login"
+				onClick={() => setSortTodoName(!sortTodoName)}
+			>
 				Ordernar por ordem alfabética
 			</button>
 		</div>
