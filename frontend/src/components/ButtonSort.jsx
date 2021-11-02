@@ -2,7 +2,14 @@ import React from 'react';
 import { useTodo } from '../contexts/TodoContext';
 
 function ButtonSort() {
-	const { setSortStatus, sortStatus, sortDate, setSortDate } = useTodo();
+	const {
+		setSortStatus,
+		sortStatus,
+		sortDate,
+		setSortDate,
+		sortTodoName,
+		setSortTodoName,
+	} = useTodo();
 
 	return (
 		<div>
@@ -11,6 +18,9 @@ function ButtonSort() {
 			</button>
 			<button type="button" onClick={() => setSortDate(!sortDate)}>
 				Ordernar por data
+			</button>
+			<button type="button" onClick={() => setSortTodoName(!sortTodoName)}>
+				Ordernar por ordem alfabética
 			</button>
 		</div>
 	);

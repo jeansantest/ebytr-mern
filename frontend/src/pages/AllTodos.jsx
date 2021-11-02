@@ -32,6 +32,7 @@ function AllTodos() {
 								name={e.name}
 								todo={e.todo}
 								status={e.status}
+								createdAt={e.createdAt}
 								forceUpdate={forceUpdate}
 								update={update}
 							/>
