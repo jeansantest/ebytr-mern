@@ -13,62 +13,42 @@ export function TodoProvider({ children }) {
 	const [sortDate, setSortDate] = React.useState(false);
 	const [sortTodoName, setSortTodoName] = React.useState(false);
 
-	const sortByStatus = ({ todos }, byName) => {
-		if (todos) {
-			const filterByPending = todos.filter((e) => e.status === 'pendente');
-			const filterByInProgress = todos.filter((e) => e.status === 'andamento');
-			const filterByDone = todos.filter((e) => e.status === 'pronto');
-			const objectFiltered = {
-				todos: [...filterByPending, ...filterByInProgress, ...filterByDone],
-			};
-			if (sortStatus && !byName) {
-				setSortTodoName(false);
-				setSortDate(false);
-				setTodos(objectFiltered);
-			}
-			if (sortStatus && byName) {
-				setSortDate(false);
-				setTodoByName(objectFiltered);
-			}
-		}
-	};
+	// const sortByStatus = ({ todos }, byName) => {
+	// 	if (todos) {
+	// 		const filterByPending = todos.filter((e) => e.status === 'pendente');
+	// 		const filterByInProgress = todos.filter((e) => e.status === 'andamento');
+	// 		const filterByDone = todos.filter((e) => e.status === 'pronto');
+	// 		const objectFiltered = {
+	// 			todos: [...filterByPending, ...filterByInProgress, ...filterByDone],
+	// 		};
+	// 		if (sortStatus && !byName) {
+	// 			setSortTodoName(false);
+	// 			setSortDate(false);
+	// 			setTodos(objectFiltered);
+	// 		}
+	// 		if (sortStatus && byName) {
+	// 			setSortDate(false);
+	// 			setTodoByName(objectFiltered);
+	// 		}
+	// 	}
+	// };
 
-	const sortByDate = ({ todos }, byName) => {
-		if (todos) {
-			const filterByDate = todos.sort(
-				(a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
-			);
-			if (sortDate && !byName) {
-				setSortTodoName(false);
-				setSortStatus(false);
-				setTodos({ todos: filterByDate });
-			}
-			if (sortDate && byName) {
-				setSortStatus(false);
-				setTodoByName({ todos: filterByDate });
-			}
-		}
-	};
-
-	const sortByTodoName = ({ todos }, byName) => {
-		if (todos) {
-			const filterByTodoName = todos.sort((a, b) => {
-				let x = a.todo.toUpperCase();
-				let y = b.todo.toUpperCase();
-				return x === y ? 0 : x > y ? 1 : -1;
-			});
-			if (sortTodoName && !byName) {
-				setSortDate(false);
-				setSortStatus(false);
-				setTodos({ todos: filterByTodoName });
-			}
-			if (sortTodoName && byName) {
-				setSortDate(false);
-				setSortStatus(false);
-				setTodoByName({ todos: filterByTodoName });
-			}
-		}
-	};
+	// const sortByDate = ({ todos }, byName) => {
+	// 	if (todos) {
+	// 		const filterByDate = todos.sort(
+	// 			(a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+	// 		);
+	// 		if (sortDate && !byName) {
+	// 			setSortTodoName(false);
+	// 			setSortStatus(false);
+	// 			setTodos({ todos: filterByDate });
+	// 		}
+	// 		if (sortDate && byName) {
+	// 			setSortStatus(false);
+	// 			setTodoByName({ todos: filterByDate });
+	// 		}
+	// 	}
+	// };
 
 	React.useEffect(() => {
 		const fetchAllTodo = async () => {
@@ -76,12 +56,75 @@ export function TodoProvider({ children }) {
 			const resultByName = await axios.get(
 				`https://ebytr.herokuapp.com/todo/${decoded.data.name}`
 			);
+			console.log('teste');
 			setTodos(result.data);
 			setTodoByName(resultByName.data);
+
+			const sortByStatus = ({ todos }, byName) => {
+				if (todos) {
+					const filterByPending = todos.filter((e) => e.status === 'pendente');
+					const filterByInProgress = todos.filter(
+						(e) => e.status === 'andamento'
+					);
+					const filterByDone = todos.filter((e) => e.status === 'pronto');
+					const objectFiltered = {
+						todos: [...filterByPending, ...filterByInProgress, ...filterByDone],
+					};
+					if (sortStatus && !byName) {
+						setSortTodoName(false);
+						setSortDate(false);
+						setTodos(objectFiltered);
+					}
+					if (sortStatus && byName) {
+						setSortDate(false);
+						setTodoByName(objectFiltered);
+					}
+				}
+			};
+
+			const sortByDate = ({ todos }, byName) => {
+				if (todos) {
+					const filterByDate = todos.sort(
+						(a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+					);
+					if (sortDate && !byName) {
+						setSortTodoName(false);
+						setSortStatus(false);
+						setTodos({ todos: filterByDate });
+					}
+					if (sortDate && byName) {
+						setSortStatus(false);
+						setTodoByName({ todos: filterByDate });
+					}
+				}
+			};
+
+			const sortByTodoName = ({ todos }, byName) => {
+				if (todos) {
+					const filterByTodoName = todos.sort((a, b) => {
+						let x = a.todo.toUpperCase();
+						let y = b.todo.toUpperCase();
+						return x === y ? 0 : x > y ? 1 : -1;
+					});
+					if (sortTodoName && !byName) {
+						setSortDate(false);
+						setSortStatus(false);
+						setTodos({ todos: filterByTodoName });
+					}
+					if (sortTodoName && byName) {
+						setSortDate(false);
+						setSortStatus(false);
+						setTodoByName({ todos: filterByTodoName });
+					}
+				}
+			};
+
 			sortByDate(result.data);
 			sortByDate(resultByName.data, true);
+
 			sortByTodoName(result.data);
 			sortByTodoName(resultByName.data, true);
+
 			sortByStatus(result.data);
 			sortByStatus(resultByName.data, true);
 		};
