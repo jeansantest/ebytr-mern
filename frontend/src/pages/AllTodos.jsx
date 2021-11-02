@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { useTodo } from '../contexts/TodoContext';
 import TodoCard from '../components/TodoCard';
+import ButtonSort from '../components/ButtonSort';
 
 function AllTodos() {
 	const token = localStorage.getItem('token');
@@ -21,18 +22,22 @@ function AllTodos() {
 			) : !todos ? (
 				<p style={{ textAlign: 'center' }}>Carregando</p>
 			) : (
-				<div className="divtodo-home">
-					{todos.todos.map((e, i) => (
-						<TodoCard
-							key={i}
-							id={e._id}
-							name={e.name}
-							todo={e.todo}
-							status={e.status}
-							forceUpdate={forceUpdate}
-							update={update}
-						/>
-					))}
+				<div>
+					<ButtonSort />
+					<div className="divtodo-home">
+						{todos.todos.map((e, i) => (
+							<TodoCard
+								key={i}
+								id={e._id}
+								name={e.name}
+								todo={e.todo}
+								status={e.status}
+								createdAt={e.createdAt}
+								forceUpdate={forceUpdate}
+								update={update}
+							/>
+						))}
+					</div>
 				</div>
 			)}
 		</div>

@@ -5,6 +5,7 @@ import TodoCard from '../components/TodoCard';
 import InputTodo from '../components/InputTodo';
 import { useTodo } from '../contexts/TodoContext';
 import './styles/Home.css';
+import ButtonSort from '../components/ButtonSort';
 
 function Home() {
 	const token = localStorage.getItem('token');
@@ -25,6 +26,7 @@ function Home() {
 			) : todoByName.todos.length > 0 ? (
 				<div>
 					<InputTodo forceUpdate={forceUpdate} update={update} />
+					<ButtonSort />
 					<div className="divtodo-home">
 						{todoByName.todos.map((e, i) => (
 							<TodoCard
@@ -33,6 +35,7 @@ function Home() {
 								name={e.name}
 								todo={e.todo}
 								status={e.status}
+								createdAt={e.createdAt}
 								forceUpdate={forceUpdate}
 								update={update}
 							/>
