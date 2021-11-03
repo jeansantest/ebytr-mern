@@ -6,10 +6,10 @@ import userEvent from '@testing-library/user-event';
 describe('Page Register', () => {
 	it('Teste se a página contém as labels de registro', () => {
 		const { container } = renderWithRouter(<Register />, { route: '/signup' });
-		const labelPokedex = container.querySelectorAll('label');
-		expect(labelPokedex.length).toBe(3);
-		expect(labelPokedex[0].textContent).toContain('Qual é o seu nome?');
-		expect(labelPokedex[1].textContent).toContain('Qual é o seu e-mail?');
+		const labelRegister = container.querySelectorAll('label');
+		expect(labelRegister.length).toBe(3);
+		expect(labelRegister[0].textContent).toContain('Qual é o seu nome?');
+		expect(labelRegister[1].textContent).toContain('Qual é o seu e-mail?');
 	});
 
 	it('Teste se é possível escrever no input', () => {

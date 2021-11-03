@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1635972602793" clover="3.2.0">
-  <project timestamp="1635972602793" name="All files">
-    <metrics statements="183" coveredstatements="17" conditionals="84" coveredconditionals="6" methods="48" coveredmethods="5" elements="315" coveredelements="28" complexity="0" loc="183" ncloc="183" packages="4" files="13" classes="13"/>
+<coverage generated="1635972942258" clover="3.2.0">
+  <project timestamp="1635972942258" name="All files">
+    <metrics statements="183" coveredstatements="29" conditionals="84" coveredconditionals="9" methods="48" coveredmethods="8" elements="315" coveredelements="46" complexity="0" loc="183" ncloc="183" packages="4" files="13" classes="13"/>
     <package name="src">
       <metrics statements="3" coveredstatements="2" conditionals="3" coveredconditionals="1" methods="2" coveredmethods="1"/>
       <file name="App.js" path="/home/jean/Documents/teste/ebytr-mern/frontend/src/App.js">
@@ -10,8 +10,8 @@
       </file>
       <file name="renderWithRouter.js" path="/home/jean/Documents/teste/ebytr-mern/frontend/src/renderWithRouter.js">
         <metrics statements="2" coveredstatements="2" conditionals="3" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
       </file>
     </package>
     <package name="src.components">
@@ -26,10 +26,10 @@
       </file>
       <file name="Header.jsx" path="/home/jean/Documents/teste/ebytr-mern/frontend/src/components/Header.jsx">
         <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
-        <line num="6" count="8" type="stmt"/>
-        <line num="8" count="8" type="stmt"/>
+        <line num="6" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
-        <line num="12" count="8" type="stmt"/>
+        <line num="12" count="16" type="stmt"/>
       </file>
       <file name="InputTodo.jsx" path="/home/jean/Documents/teste/ebytr-mern/frontend/src/components/InputTodo.jsx">
         <metrics statements="11" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
@@ -171,7 +171,7 @@
       </file>
     </package>
     <package name="src.pages">
-      <metrics statements="48" coveredstatements="12" conditionals="26" coveredconditionals="4" methods="14" coveredmethods="3"/>
+      <metrics statements="48" coveredstatements="24" conditionals="26" coveredconditionals="7" methods="14" coveredmethods="6"/>
       <file name="AllTodos.jsx" path="/home/jean/Documents/teste/ebytr-mern/frontend/src/pages/AllTodos.jsx">
         <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="9" count="0" type="stmt"/>
@@ -187,20 +187,20 @@
         <line num="32" count="0" type="stmt"/>
       </file>
       <file name="Login.jsx" path="/home/jean/Documents/teste/ebytr-mern/frontend/src/pages/Login.jsx">
-        <metrics statements="13" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
+        <metrics statements="13" coveredstatements="12" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="8" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
       </file>
       <file name="Register.jsx" path="/home/jean/Documents/teste/ebytr-mern/frontend/src/pages/Register.jsx">
         <metrics statements="14" coveredstatements="12" conditionals="6" coveredconditionals="4" methods="3" coveredmethods="3"/>
