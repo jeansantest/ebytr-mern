@@ -22,7 +22,9 @@ function Home() {
 					<Link to="/login">Clique aqui para fazer seu login</Link>
 				</div>
 			) : !todoByName ? (
-				<p style={{ textAlign: 'center' }}>Carregando...</p>
+				<p data-testid="loading" style={{ textAlign: 'center' }}>
+					Carregando...
+				</p>
 			) : todoByName.todos.length > 0 ? (
 				<div>
 					<InputTodo forceUpdate={forceUpdate} update={update} />

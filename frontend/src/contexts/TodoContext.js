@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useToken } from './TokenContext';
 
-const TodoContext = React.createContext();
+export const TodoContext = React.createContext();
 
 export function TodoProvider({ children }) {
 	const { decoded } = useToken();

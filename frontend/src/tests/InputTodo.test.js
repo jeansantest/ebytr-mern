@@ -14,27 +14,4 @@ describe('Component InputTodo', () => {
 			'Adicionar'
 		);
 	});
-
-	// it('Teste se é possível escrever no input', () => {
-	// 	const { container } = renderWithRouter(<Login />, {
-	// 		route: '/login',
-	// 	});
-	// 	const inputName = container.querySelector('.input-todo');
-	// 	userEvent.type(inputName, 'Jean');
-	// 	expect(inputName.value).toContain('Jean');
-	// });
-
-	// it('Teste se entrega erro ao entregar dados inválidos', async () => {
-	// 	const { container, findByText } = renderWithRouter(<Login />, {
-	// 		route: '/login',
-	// 	});
-	// 	const buttonSubmit = container.querySelector('.submit-login');
-	// 	userEvent.click(buttonSubmit);
-	// 	const pRegister = await findByText(
-	// 		/Email ou senha inválidos ou usuário ainda não criado/i
-	// 	);
-	// 	expect(pRegister.innerHTML).toContain(
-	// 		'Email ou senha inválidos ou usuário ainda não criado'
-	// 	);
-	// });
 });
