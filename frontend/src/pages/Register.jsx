@@ -60,8 +60,9 @@ function Register() {
 						placeholder="Sua senha"
 						className="input-login"
 					/>
-					{registered === 'invalid' &&
-						'Nome, email ou senha inválidos ou usuário já criado'}
+					{registered === 'invalid' && (
+						<p>Nome, email ou senha inválidos ou usuário já criado</p>
+					)}
 					<button type="submit" onClick={handleSubmit} className="submit-login">
 						Registrar
 					</button>
