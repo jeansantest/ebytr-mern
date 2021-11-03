@@ -1,12 +1,10 @@
 import React from 'react';
 import App from '../App';
-import Home from '../pages/Home';
 import { render } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import { createMemoryHistory } from 'history';
 import { LocalStorageMock } from '@react-mock/localstorage';
 import { Router } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 
 describe('Page Home', () => {
 	it('Teste se a página contém as labels para login', () => {
