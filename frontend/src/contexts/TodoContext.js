@@ -39,6 +39,7 @@ export function TodoProvider({ children }) {
 						setTodos(objectFiltered);
 					}
 					if (sortStatus && byName) {
+						setSortTodoName(false);
 						setSortDate(false);
 						setTodoByName(objectFiltered);
 					}
@@ -56,6 +57,7 @@ export function TodoProvider({ children }) {
 						setTodos({ todos: filterByDate });
 					}
 					if (sortDate && byName) {
+						setSortTodoName(false);
 						setSortStatus(false);
 						setTodoByName({ todos: filterByDate });
 					}
@@ -81,15 +83,16 @@ export function TodoProvider({ children }) {
 					}
 				}
 			};
+			if (sortTodoName || sortDate || sortStatus) {
+				sortByDate(result.data);
+				sortByDate(resultByName.data, true);
 
-			sortByDate(result.data);
-			sortByDate(resultByName.data, true);
+				sortByTodoName(result.data);
+				sortByTodoName(resultByName.data, true);
 
-			sortByTodoName(result.data);
-			sortByTodoName(resultByName.data, true);
-
-			sortByStatus(result.data);
-			sortByStatus(resultByName.data, true);
+				sortByStatus(result.data);
+				sortByStatus(resultByName.data, true);
+			}
 		};
 		fetchAllTodo();
 	}, [decoded, update, sortStatus, sortDate, sortTodoName]);
