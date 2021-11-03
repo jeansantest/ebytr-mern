@@ -35,7 +35,6 @@ describe('Post /users/login', () => {
 			.post('/users/login')
 			.send({ email: 'jean@gmail.com', password: '123456' })
 			.end(function (err, res) {
-				// .set("Authorization", "Bearer " + token)
 				expect(res).to.have.status(200);
 				expect(JSON.parse(res.text)).to.have.property('token');
 				done();
