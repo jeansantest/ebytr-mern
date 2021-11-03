@@ -13,50 +13,13 @@ export function TodoProvider({ children }) {
 	const [sortDate, setSortDate] = React.useState(false);
 	const [sortTodoName, setSortTodoName] = React.useState(false);
 
-	// const sortByStatus = ({ todos }, byName) => {
-	// 	if (todos) {
-	// 		const filterByPending = todos.filter((e) => e.status === 'pendente');
-	// 		const filterByInProgress = todos.filter((e) => e.status === 'andamento');
-	// 		const filterByDone = todos.filter((e) => e.status === 'pronto');
-	// 		const objectFiltered = {
-	// 			todos: [...filterByPending, ...filterByInProgress, ...filterByDone],
-	// 		};
-	// 		if (sortStatus && !byName) {
-	// 			setSortTodoName(false);
-	// 			setSortDate(false);
-	// 			setTodos(objectFiltered);
-	// 		}
-	// 		if (sortStatus && byName) {
-	// 			setSortDate(false);
-	// 			setTodoByName(objectFiltered);
-	// 		}
-	// 	}
-	// };
-
-	// const sortByDate = ({ todos }, byName) => {
-	// 	if (todos) {
-	// 		const filterByDate = todos.sort(
-	// 			(a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
-	// 		);
-	// 		if (sortDate && !byName) {
-	// 			setSortTodoName(false);
-	// 			setSortStatus(false);
-	// 			setTodos({ todos: filterByDate });
-	// 		}
-	// 		if (sortDate && byName) {
-	// 			setSortStatus(false);
-	// 			setTodoByName({ todos: filterByDate });
-	// 		}
-	// 	}
-	// };
-
 	React.useEffect(() => {
 		const fetchAllTodo = async () => {
 			const result = await axios.get(`https://ebytr.herokuapp.com/todo`);
 			const resultByName = await axios.get(
 				`https://ebytr.herokuapp.com/todo/${decoded.data.name}`
 			);
-			console.log('teste');
+
 			setTodos(result.data);
 			setTodoByName(resultByName.data);
 
@@ -76,6 +39,7 @@ export function TodoProvider({ children }) {
 						setTodos(objectFiltered);
 					}
 					if (sortStatus && byName) {
+						setSortTodoName(false);
 						setSortDate(false);
 						setTodoByName(objectFiltered);
 					}
@@ -93,6 +57,7 @@ export function TodoProvider({ children }) {
 						setTodos({ todos: filterByDate });
 					}
 					if (sortDate && byName) {
+						setSortTodoName(false);
 						setSortStatus(false);
 						setTodoByName({ todos: filterByDate });
 					}
@@ -118,15 +83,16 @@ export function TodoProvider({ children }) {
 					}
 				}
 			};
+			if (sortTodoName || sortDate || sortStatus) {
+				sortByDate(result.data);
+				sortByDate(resultByName.data, true);
 
-			sortByDate(result.data);
-			sortByDate(resultByName.data, true);
+				sortByTodoName(result.data);
+				sortByTodoName(resultByName.data, true);
 
-			sortByTodoName(result.data);
-			sortByTodoName(resultByName.data, true);
-
-			sortByStatus(result.data);
-			sortByStatus(resultByName.data, true);
+				sortByStatus(result.data);
+				sortByStatus(resultByName.data, true);
+			}
 		};
 		fetchAllTodo();
 	}, [decoded, update, sortStatus, sortDate, sortTodoName]);
