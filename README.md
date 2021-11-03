@@ -1,6 +1,6 @@
 <h1 align='center'>Ebytr</h1>
 <div align='center'>
-<a href="https://ebytr.netlify.app/" target="_blank">Deploy no Netlify - Frontend</a>
+<a href="https://ebytr.netlify.app/" target="_blank">Deploy no Netlify - Frontend</a> || 
 <a href="https://ebytr.herokuapp.com/" target="_blank">Deploy no Heroku - Backend</a>
 <p>Projeto realizado com intuito de simular uma entrevista, completando o projeto tecnico.
 </div>
