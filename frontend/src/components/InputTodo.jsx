@@ -23,7 +23,7 @@ function InputTodo({ forceUpdate, update }) {
 			);
 			forceUpdate(!update);
 		} catch (err) {
-			console.log(err.message);
+			return err.message;
 		}
 	};
 
