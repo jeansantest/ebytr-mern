@@ -23,12 +23,12 @@ function InputTodo({ forceUpdate, update }) {
 			);
 			forceUpdate(!update);
 		} catch (err) {
-			console.log(err.message);
+			return err.message;
 		}
 	};
 
 	return (
-		<div className="div-todo">
+		<div data-testid="div-todo" className="div-todo">
 			<form>
 				<input
 					className="input-todo"

@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useToken } from '../contexts/TokenContext';
 import './styles/Header.css';
 
 function Header() {
-	const { setToken } = useToken();
 	const token = localStorage.getItem('token');
 
 	const handleLogout = () => {
 		localStorage.removeItem('token');
-		setToken('');
 	};
 
 	return (

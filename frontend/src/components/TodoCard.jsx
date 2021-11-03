@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import dateFormat from 'dateformat';
+// import dateFormat from 'dateformat';
 import './styles/TodoCard.css';
 
 function TodoCard(props) {
@@ -95,7 +95,7 @@ function TodoCard(props) {
 				<span onClick={editStatus} className={`bola ${props.status}`} />
 				{status}
 			</p>
-			<p>{dateFormat(props.createdAt, 'ddd, mmm dS, yy, h:MM:ss TT')}</p>
+			{/* <p>{dateFormat(props.createdAt, 'ddd, mmm dS, yy, h:MM:ss TT')}</p> */}
 			<div>
 				<FaTrashAlt style={{ cursor: 'pointer' }} onClick={deleteTodo} />
 

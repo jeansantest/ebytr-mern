@@ -3,12 +3,10 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import './styles/Login.css';
 import Header from '../components/Header';
-import { useToken } from '../contexts/TokenContext';
 
 function Login() {
 	const [data, setData] = React.useState({ email: '', password: '' });
 	const [logged, setLogged] = React.useState(false);
-	const { setToken } = useToken();
 	const token = localStorage.getItem('token');
 
 	const handleChange = ({ target }) => {
@@ -24,7 +22,6 @@ function Login() {
 				data
 			);
 			localStorage.setItem('token', result.data.token);
-			setToken(result.data.token);
 		} catch (err) {
 			setLogged('invalid');
 		}

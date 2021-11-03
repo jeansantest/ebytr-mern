@@ -4,7 +4,6 @@ import { useJwt } from 'react-jwt';
 const TokenContext = React.createContext();
 
 export function TokenProvider({ children }) {
-	const [tokens, setToken] = React.useState('');
 	const token = localStorage.getItem('token');
 	const { decodedToken } = useJwt(token);
 	const [decoded, setDecoded] = React.useState({ data: '' });
@@ -13,10 +12,10 @@ export function TokenProvider({ children }) {
 		if (token && decodedToken) {
 			setDecoded(decodedToken);
 		}
-	}, [decodedToken, tokens, token]);
+	}, [decodedToken, token]);
 
 	return (
-		<TokenContext.Provider value={{ token, setToken, decoded }}>
+		<TokenContext.Provider value={{ token, decoded }}>
 			{children}
 		</TokenContext.Provider>
 	);
