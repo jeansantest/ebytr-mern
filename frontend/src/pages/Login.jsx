@@ -3,11 +3,11 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import './styles/Login.css';
 import Header from '../components/Header';
+import { useToken } from '../contexts/TokenContext';
 
 function Login() {
 	const [data, setData] = React.useState({ email: '', password: '' });
-	const [logged, setLogged] = React.useState(false);
-	// const token = localStorage.getItem('token');
+	const { logged, setLogged } = useToken();
 
 	const handleChange = ({ target }) => {
 		const { name, value } = target;
