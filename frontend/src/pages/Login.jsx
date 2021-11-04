@@ -7,7 +7,7 @@ import Header from '../components/Header';
 function Login() {
 	const [data, setData] = React.useState({ email: '', password: '' });
 	const [logged, setLogged] = React.useState(false);
-	const token = localStorage.getItem('token');
+	// const token = localStorage.getItem('token');
 
 	const handleChange = ({ target }) => {
 		const { name, value } = target;
@@ -22,6 +22,7 @@ function Login() {
 				data
 			);
 			localStorage.setItem('token', result.data.token);
+			setLogged('logged');
 		} catch (err) {
 			setLogged('invalid');
 		}
@@ -58,7 +59,7 @@ function Login() {
 					<button type="submit" onClick={handleSubmit} className="submit-login">
 						Entrar
 					</button>
-					{token && <Redirect to="/" />}
+					{logged === 'logged' && <Redirect to="/" />}
 				</form>
 			</div>
 		</div>
